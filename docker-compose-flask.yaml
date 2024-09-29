@@ -1,0 +1,16 @@
+version: '3'
+services:
+  web:
+    image: bettysami/flask-docker-app
+    deploy:
+      replicas: 3
+    ports:
+      - "5000"
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "80:80"
+    depends_on:
+      - web
